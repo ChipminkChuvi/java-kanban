@@ -1,3 +1,5 @@
+package taskmodel;
+
 public class SubTask extends Task {
     private int idEpic;
 
@@ -5,22 +7,19 @@ public class SubTask extends Task {
         super(name, description);
         this.idEpic = idEpic;
     }
-
     public SubTask(int id, String name, String description, int idEpic) {
         super(id, name, description);
         this.idEpic = idEpic;
     }
-
     public SubTask(int id, String name, String description, int idEpic, TaskStatus taskStatus) {
         super(id, name, description, taskStatus);
         this.idEpic = idEpic;
     }
-
     public int getIdEpic() {
         return idEpic;
     }
 
-    public void setIdEpic(int idEpic) {
+    private void setIdEpic(int idEpic) {
         this.idEpic = idEpic;
     }
 
@@ -28,8 +27,8 @@ public class SubTask extends Task {
     public String toString() {
         return "SubTask{" +
                 "id=" + getId() +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
                 ", idEpic=" + idEpic +
                 ", taskStatus=" + getTaskStatus() +
                 '}';

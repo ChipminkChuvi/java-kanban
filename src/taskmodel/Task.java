@@ -1,9 +1,11 @@
+package taskmodel;
+
 import java.util.Objects;
 
 public class Task {
     private int id;
-    public String name;
-    public String description;
+    private String name;
+    private String description;
     private TaskStatus taskStatus;
 
     public Task(String name, String description) {
@@ -19,7 +21,7 @@ public class Task {
         this.taskStatus = TaskStatus.NEW;
     }
 
-    Task(int id, String name, String description, TaskStatus taskStatus) {
+    public Task(int id, String name, String description, TaskStatus taskStatus) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,8 +31,28 @@ public class Task {
     public Task() {
     }
 
+    private void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
+
         return id;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public TaskStatus getTaskStatus() {

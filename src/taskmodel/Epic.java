@@ -1,8 +1,10 @@
+package taskmodel;
+
 import java.util.ArrayList;
 
 public class Epic extends Task {
 
-    public ArrayList<Integer> linkedSubTask;
+    private ArrayList<Integer> linkedSubTask;
 
     public Epic(String name, String description) {
         super(name, description);
@@ -18,18 +20,20 @@ public class Epic extends Task {
         super(id, name, description);
         this.linkedSubTask = linkedSubTask;
     }
-
-
-    public Epic() {
+    public ArrayList<Integer> getLinkedSubTask() {
+        return linkedSubTask;
     }
 
+    public void setLinkedSubTask(ArrayList<Integer> linkedSubTask) {
+        this.linkedSubTask = linkedSubTask;
+    }
 
     @Override
     public String toString() {
         return "Epic{" +
                 "id=" + getId() +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
                 ", linkedSubTask=" + linkedSubTask +
                 ", taskStatus=" + getTaskStatus() +
                 '}';
