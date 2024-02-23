@@ -1,16 +1,20 @@
+import taskmanager.InMemoryTaskManager;
+import taskmanager.Managers;
 import taskmanager.TaskManager;
 import taskmodel.*;
 public class Main {
-
-    static TaskManager taskManager;
 
     public static void main(String[] args) {
 
         System.out.println("Поехали!");
 
-        taskManager = new TaskManager();
+
+        TaskManager taskManager = Managers.getDefault();
+
+        taskManager = new InMemoryTaskManager();
         //Создание Задач/Эпиков/Сабтасок
         taskManager.createTask(new Task("Задача1", "Описание Задачи1"));
+
         taskManager.createTask(new Task("Задача2", "Описание Задачи2"));
 
         taskManager.createEpic(new Epic("Эпик1", "Описание Эпика1"));
@@ -44,6 +48,16 @@ public class Main {
         //Вывод эпиков с измененным статусом
         System.out.println(taskManager.getEpic(15));
         System.out.println(taskManager.getEpic(20));
+////////////////////////////////////////////////
+        System.out.println(taskManager.getEpic(15));
+        System.out.println(taskManager.getEpic(20));
+        System.out.println(taskManager.getSubTask(25));
+        System.out.println(taskManager.getSubTask(30));
+        System.out.println(taskManager.getEpic(15));
+        System.out.println(taskManager.getTask(10));
+
+        System.out.println(taskManager.getHistoryManager().getHistory());
+
         //Удаление задачи и сабтаски
         taskManager.removeTaskById(5);
         taskManager.removeSubTaskById(30);
@@ -54,5 +68,7 @@ public class Main {
         System.out.println(taskManager.getAllSubTask());
         System.out.println(taskManager.getEpic(20));
 
+
     }
+
 }

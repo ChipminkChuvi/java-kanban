@@ -28,9 +28,6 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    public Task() {
-    }
-
     private void setId(int id) {
         this.id = id;
     }

@@ -20,11 +20,13 @@ public class Epic extends Task {
         super(id, name, description);
         this.linkedSubTask = linkedSubTask;
     }
+
+
     public ArrayList<Integer> getLinkedSubTask() {
         return linkedSubTask;
     }
 
-    public void setLinkedSubTask(ArrayList<Integer> linkedSubTask) {
+    private void setLinkedSubTask(ArrayList<Integer> linkedSubTask) {
         this.linkedSubTask = linkedSubTask;
     }
 
