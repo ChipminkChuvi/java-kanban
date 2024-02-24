@@ -3,15 +3,15 @@ import org.junit.jupiter.api.Test;
 import taskmanager.*;
 import taskmodel.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManagersTest {
-Task task = new Task(5,"Задача1", "Описание Задачи1");
+    private Task task = new Task(5, "Задача1", "Описание Задачи1");
 
     @Test
-    void testCreateTaskManager () {
+    void testCreateTaskManager() {
         TaskManager taskManager = Managers.getDefault();
         taskManager.createTask(task);
 
@@ -19,10 +19,10 @@ Task task = new Task(5,"Задача1", "Описание Задачи1");
 
         Task testTask = taskManager.getTask(taskId);
 
-        Assertions.assertNotNull(testTask,"Задача не найдена.");
+        Assertions.assertNotNull(testTask, "Задача не найдена.");
         Assertions.assertEquals(task, testTask, "Задачи не совпадают.");
 
-        final ArrayList<Task> tasks = taskManager.getAllTasks();
+        final List<Task> tasks = taskManager.getAllTasks();
 
         Assertions.assertNotNull(tasks, "Задачи не возвращаются.");
         Assertions.assertEquals(1, tasks.size(), "Неверное количество задач.");
@@ -30,10 +30,10 @@ Task task = new Task(5,"Задача1", "Описание Задачи1");
     }
 
     @Test
-    void testCreateHistoryManager () {
+    void testCreateHistoryManager() {
         HistoryManager historyManager = Managers.getDefaultHistory();
         historyManager.add(task);
-        final ArrayList<Task> history = historyManager.getHistory();
+        final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "История не пустая.");
         assertEquals(1, history.size(), "История не пустая.");
     }

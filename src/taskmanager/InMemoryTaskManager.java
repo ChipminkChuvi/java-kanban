@@ -3,14 +3,16 @@ package taskmanager;
 import taskmodel.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class InMemoryTaskManager implements TaskManager {
     private static int id = 0;
-    private HashMap<Integer, Task> onlyTask = new HashMap<>();
-    private HashMap<Integer, Epic> onlyEpic = new HashMap<>();
-    private HashMap<Integer, SubTask> onlySubTask = new HashMap<>();
+    private Map<Integer, Task> onlyTask = new HashMap<>();
+    private Map<Integer, Epic> onlyEpic = new HashMap<>();
+    private Map<Integer, SubTask> onlySubTask = new HashMap<>();
 
     private HistoryManager historyManager = Managers.getDefaultHistory();
 
@@ -44,7 +46,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (onlyEpic.containsKey(subTask.getIdEpic())) {
 
             SubTask subTask1 = new SubTask(setId(), subTask.getName(), subTask.getDescription(), subTask.getIdEpic());
-            if (subTask1.getId() == subTask1.getIdEpic()){
+            if (subTask1.getId() == subTask1.getIdEpic()) {
                 return null;
             }
 
@@ -60,8 +62,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public ArrayList<Task> getAllTasks() {
-        ArrayList<Task> allTasks = new ArrayList<>();
+    public List<Task> getAllTasks() {
+        List<Task> allTasks = new ArrayList<>();
         for (Integer id : onlyTask.keySet()) {
             allTasks.add(onlyTask.get(id));
         }
@@ -69,8 +71,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Epic> getAllEpics() {
-        ArrayList<Epic> allEpics = new ArrayList<>();
+    public List<Epic> getAllEpics() {
+        List<Epic> allEpics = new ArrayList<>();
         for (Integer id : onlyEpic.keySet()) {
             allEpics.add(onlyEpic.get(id));
         }
@@ -78,8 +80,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<SubTask> getAllSubTask() {
-        ArrayList<SubTask> allSubTask = new ArrayList<>();
+    public List<SubTask> getAllSubTask() {
+        List<SubTask> allSubTask = new ArrayList<>();
         for (Integer id : onlySubTask.keySet()) {
             allSubTask.add(onlySubTask.get(id));
         }
@@ -118,13 +120,13 @@ public class InMemoryTaskManager implements TaskManager {
         SubTask subTask1 = onlySubTask.get(id);
         Epic newEpic = onlyEpic.get(subTask1.getIdEpic());
         newEpic.getLinkedSubTask().remove(id);
-        onlyEpic.put(subTask1.getIdEpic(),newEpic);
+        onlyEpic.put(subTask1.getIdEpic(), newEpic);
         onlySubTask.remove(id);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public Task getTask(Integer id) {;
+    public Task getTask(Integer id) {
         historyManager.add(onlyTask.get(id));
         return onlyTask.get(id);
     }
@@ -143,7 +145,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public HashMap<Integer, Task> updateTask(Task task) {
+    public Map<Integer, Task> updateTask(Task task) {
         for (Integer key : onlyTask.keySet()) {
             if (key == task.getId()) {
                 onlyTask.put(task.getId(), task);
@@ -154,7 +156,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public HashMap<Integer, Epic> updateEpic(Epic epic) {
+    public Map<Integer, Epic> updateEpic(Epic epic) {
         for (Integer key : onlyEpic.keySet()) {
             if (key == epic.getId()) {
                 onlyEpic.put(epic.getId(), epic);
@@ -190,7 +192,7 @@ public class InMemoryTaskManager implements TaskManager {
 
 
     @Override
-    public HashMap<Integer, SubTask> updateSubTask(SubTask subTask) {
+    public Map<Integer, SubTask> updateSubTask(SubTask subTask) {
         for (Integer key : onlySubTask.keySet()) {
             if (key == subTask.getId()) {
                 onlySubTask.put(subTask.getId(), subTask);
@@ -203,8 +205,8 @@ public class InMemoryTaskManager implements TaskManager {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public ArrayList<SubTask> getSubTaskFromEpic(Integer idEpic) {
-        ArrayList<SubTask> subTaskFromEpic = new ArrayList<>();
+    public List<SubTask> getSubTaskFromEpic(Integer idEpic) {
+        List<SubTask> subTaskFromEpic = new ArrayList<>();
         Epic epic = onlyEpic.get(idEpic);
 
         for (Integer i : epic.getLinkedSubTask()) {

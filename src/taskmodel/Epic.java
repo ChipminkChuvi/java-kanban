@@ -1,10 +1,11 @@
 package taskmodel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task {
 
-    private ArrayList<Integer> linkedSubTask;
+    private List<Integer> linkedSubTask;
 
     public Epic(String name, String description) {
         super(name, description);
@@ -22,7 +23,7 @@ public class Epic extends Task {
     }
 
 
-    public ArrayList<Integer> getLinkedSubTask() {
+    public List<Integer> getLinkedSubTask() {
         return linkedSubTask;
     }
 

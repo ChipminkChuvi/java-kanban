@@ -4,12 +4,13 @@ import taskmodel.Epic;
 import taskmodel.SubTask;
 import taskmodel.Task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface TaskManager<I> {
 
     int getId();
+
     Task createTask(Task task);
 
     Epic createEpic(Epic epic);
@@ -17,11 +18,11 @@ public interface TaskManager<I> {
     SubTask createSubTask(SubTask subTask);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
 
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
-    ArrayList<SubTask> getAllSubTask();
+    List<SubTask> getAllSubTask();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     void removeAllTask();
@@ -45,14 +46,14 @@ public interface TaskManager<I> {
     SubTask getSubTask(Integer id);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    HashMap<Integer, Task> updateTask(Task task);
+    Map<Integer, Task> updateTask(Task task);
 
-    HashMap<Integer, Epic> updateEpic(Epic epic);
+    Map<Integer, Epic> updateEpic(Epic epic);
 
-    HashMap<Integer, SubTask> updateSubTask(SubTask subTask);
+    Map<Integer, SubTask> updateSubTask(SubTask subTask);
 
-    ArrayList<SubTask> getSubTaskFromEpic(Integer idEpic);
+    List<SubTask> getSubTaskFromEpic(Integer idEpic);
 
-     HistoryManager getHistoryManager();
+    HistoryManager getHistoryManager();
 }
 

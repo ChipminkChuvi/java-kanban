@@ -3,12 +3,14 @@ package taskmanager;
 import taskmodel.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private ArrayList<Task> historyList = new ArrayList<>();
+    private List<Task> historyList = new ArrayList<>();
+
     @Override
     public void add(Task task) {
-        if (historyList.size() != 10){
+        if (historyList.size() != 10) {
             historyList.add(task);
         } else {
             historyList.remove(0);
@@ -17,7 +19,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistory() {
         return historyList;
     }
 }

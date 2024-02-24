@@ -1,9 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import taskmodel.Epic;
-import taskmodel.Task;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EpicTest {
 
