@@ -65,7 +65,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         return linkList;
     }
 
-    static class LinkList<T> {
+    private class LinkList<T> {
         private Node<T> head;
         private Node<T> tail;
         int size = 0;
