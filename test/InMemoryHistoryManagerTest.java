@@ -68,10 +68,10 @@ class InMemoryHistoryManagerTest {
         final Node nodeFirst = linkHashMap.get(task.getId());
         final Node nodeSecond = linkHashMap.get(task1.getId());
 
-        Assertions.assertEquals(nodeFirst.prev, null);
-        Assertions.assertEquals(nodeFirst.next, nodeSecond);
-        Assertions.assertEquals(nodeSecond.prev, nodeFirst);
-        Assertions.assertEquals(nodeSecond.next, null);
+        Assertions.assertEquals(nodeFirst.getPrev(), null);
+        Assertions.assertEquals(nodeFirst.getNext(), nodeSecond);
+        Assertions.assertEquals(nodeSecond.getPrev(), nodeFirst);
+        Assertions.assertEquals(nodeSecond.getNext(), null);
     }
 
 }
