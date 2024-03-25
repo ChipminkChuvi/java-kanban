@@ -5,6 +5,7 @@ import taskmodel.*;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -91,5 +92,19 @@ class InMemoryTaskManagerTest {
         Assertions.assertEquals(testTask1.getName(), task1.getName());
         Assertions.assertEquals(testTask1.getDescription(), task1.getDescription());
         Assertions.assertEquals(testTask1.getTaskStatus(), task1.getTaskStatus());
+    }
+
+    @Test
+    void checkingThatNoIrrelevantIdSubtasksShouldRemainInsideEpics() {
+        inMemoryTaskManager.createEpic(epic);
+        Epic epic = inMemoryTaskManager.getEpic(inMemoryTaskManager.getId());
+        inMemoryTaskManager.createSubTask(new SubTask("Сабтаска1", "Описание Сабтаски 1, принадлежит эпику1", inMemoryTaskManager.getId()));
+
+        List<Integer> list = epic.getLinkedSubTask();
+        Assertions.assertEquals(list.size(), 1);
+
+        inMemoryTaskManager.removeSubTaskById(inMemoryTaskManager.getId());
+        list = epic.getLinkedSubTask();
+        Assertions.assertEquals(list.size(), 0);
     }
 }
