@@ -16,8 +16,11 @@ public class InMemoryTaskManager implements TaskManager {
 
     private HistoryManager historyManager = Managers.getDefaultHistory();
 
+    protected static void setId(int id) {
+        InMemoryTaskManager.id = id;
+    }
 
-    private static int setId() {
+    protected static int incrementId() {
         id = id + 5;
         return id;
     }
@@ -29,14 +32,14 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task createTask(Task task) {
-        Task task1 = new Task(setId(), task.getName(), task.getDescription());
+        Task task1 = new Task(incrementId(), task.getName(), task.getDescription());
         onlyTask.put(task1.getId(), task1);
         return task1;
     }
 
     @Override
     public Epic createEpic(Epic epic) {
-        Epic epic1 = new Epic(setId(), epic.getName(), epic.getDescription());
+        Epic epic1 = new Epic(incrementId(), epic.getName(), epic.getDescription());
         onlyEpic.put(epic1.getId(), epic1);
         return epic1;
     }
@@ -45,7 +48,7 @@ public class InMemoryTaskManager implements TaskManager {
     public SubTask createSubTask(SubTask subTask) {
         if (onlyEpic.containsKey(subTask.getIdEpic())) {
 
-            SubTask subTask1 = new SubTask(setId(), subTask.getName(), subTask.getDescription(), subTask.getIdEpic());
+            SubTask subTask1 = new SubTask(incrementId(), subTask.getName(), subTask.getDescription(), subTask.getIdEpic());
             if (subTask1.getId() == subTask1.getIdEpic()) {
                 return null;
             }
