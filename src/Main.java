@@ -13,9 +13,9 @@ public class Main {
         FileBackedTaskManager fileBackedTaskManager = Managers.getDefaultFileBacked();
         fileBackedTaskManager.loadFromFile();
 
-        fileBackedTaskManager.createTask(new Task("Задача4", "Описание Задачи4"));
-        fileBackedTaskManager.createEpic(new Epic("Эпик3", "Описание Эпика4"));
-        fileBackedTaskManager.createSubTask(new SubTask("Сабтаска4", "Описание Сабтаски 4", 20));
+//        fileBackedTaskManager.createTask(new Task("Задача4", "Описание Задачи4"));
+//        fileBackedTaskManager.createEpic(new Epic("Эпик3", "Описание Эпика4"));
+//        fileBackedTaskManager.createSubTask(new SubTask("Сабтаска4", "Описание Сабтаски 4", 20));
 
 
 //        fileBackedTaskManager.createTask(new Task("Задача1", "Описание Задачи1"));
