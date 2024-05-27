@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
-    public String fileName;
+    private String fileName;
 
     public FileBackedTaskManager(String fileName) {
         this.fileName = fileName;
