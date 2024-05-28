@@ -14,6 +14,12 @@ public class Task {
         this.taskStatus = TaskStatus.NEW;
     }
 
+    public Task(String name, String description,TaskStatus taskStatus) {
+        this.name = name;
+        this.description = description;
+        this.taskStatus = taskStatus;
+    }
+
     public Task(int id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -63,14 +69,13 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", taskStatus=" + taskStatus +
-                '}';
+        return
+                id +
+                ",TASK," +
+                name + "," +
+                taskStatus + "," +
+                description;
     }
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

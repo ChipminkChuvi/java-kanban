@@ -12,4 +12,9 @@ public class Managers {
         HistoryManager historyManager = new InMemoryHistoryManager();
         return historyManager;
     }
+
+    public static FileBackedTaskManager getDefaultFileBacked() {
+        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager("Backup.csv");
+        return fileBackedTaskManager;
+    }
 }
