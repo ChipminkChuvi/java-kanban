@@ -27,9 +27,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         this.fileName = fileName;
     }
 
-    private void save() {
+    public void save() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, StandardCharsets.UTF_8))) {
-            bufferedWriter.write("id,type,name,status,description,epic" + "\n");
+            bufferedWriter.write("id,type,name,status,description,epic,startTime,duration" + "\n");
             for (Task task : getAllTasks()) {
                 bufferedWriter.write(task.toString() + "\n");
             }
@@ -66,13 +66,13 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 }
 
                 if (lineSplit[1].equals("TASK")) {
-                    Task task = new Task(lineSplit[2], lineSplit[4], taskStatusFromString(lineSplit[3]));
+                    Task task = new Task(lineSplit[2], lineSplit[4], taskStatusFromString(lineSplit[3]), lineSplit[5], lineSplit[6]);
                     super.createTask(task);
                 } else if (lineSplit[1].equals("EPIC")) {
-                    Epic epic = new Epic(lineSplit[2], lineSplit[4], taskStatusFromString(lineSplit[3]));
+                    Epic epic = new Epic(lineSplit[2], lineSplit[4], taskStatusFromString(lineSplit[3]), lineSplit[5], lineSplit[6]);
                     super.createEpic(epic);
                 } else if (lineSplit[1].equals("SUBTASK")) {
-                    SubTask subTask = new SubTask(lineSplit[2], lineSplit[4], Integer.parseInt(lineSplit[5]), taskStatusFromString(lineSplit[3]));
+                    SubTask subTask = new SubTask(lineSplit[2], lineSplit[4], Integer.parseInt(lineSplit[5]), taskStatusFromString(lineSplit[3]), lineSplit[6], lineSplit[7]);
                     super.createSubTask(subTask);
                 }
 
