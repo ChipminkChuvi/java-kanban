@@ -17,6 +17,7 @@ class InMemoryHistoryManagerTest {
     private Task task = new Task(5, "Задача1", "Описание Задачи1");
     private Task task1 = new Task(10, "Задача2", "Описание Задачи2");
     private Task task2 = new Task(15, "Задача3", "Описание Задачи3");
+    private Task task3 = new Task(20, "Задача4", "Описание Задачи4");
     private HistoryManager historyManager = new InMemoryHistoryManager();
     private InMemoryHistoryManager historyManageFromInMemoryHistoryManager = new InMemoryHistoryManager();
 
@@ -39,7 +40,7 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void checkingDeletionFromHistory() {
+    void checkingDeletionFirstFromHistory() {
         historyManager.add(task);
         historyManager.add(task1);
         historyManager.add(task2);
@@ -49,10 +50,31 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
+    void checkingDeletionMedtFromHistory() {
+        historyManager.add(task);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
+        historyManager.remove(task2.getId());
+        final List<Task> history = historyManager.getHistory();
+        Assertions.assertEquals(history.size(), 3);
+    }
+
+    @Test
+    void checkingDeletionLastFromHistory() {
+        historyManager.add(task);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.remove(task2.getId());
+        final List<Task> history = historyManager.getHistory();
+        Assertions.assertEquals(history.getLast(), task1);
+    }
+
+    @Test
     void addedTasksToUpdateThePreviousVersionTaskAndAddToEndOfTheList() {
         historyManager.add(task);
         historyManager.add(task1);
-        Task task3 = new Task(5, "Задача1", "Обновление задачи1", TaskStatus.IN_PROGRESS);
+        Task task3 = new Task(5, "Задача1", "Обновление задачи1", TaskStatus.IN_PROGRESS, "08.06.2024 12:15", "15");
         historyManager.add(task3);
         final List<Task> history = historyManager.getHistory();
         Assertions.assertEquals(history.getFirst(), task1);

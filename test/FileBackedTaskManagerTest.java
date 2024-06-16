@@ -1,3 +1,4 @@
+import exceptions.ManagerSaveException;
 import org.junit.After;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -7,9 +8,10 @@ import taskmanager.FileBackedTaskManager;
 import taskmodel.Epic;
 import taskmodel.SubTask;
 import taskmodel.Task;
+import taskmodel.TaskStatus;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
 public class FileBackedTaskManagerTest {
@@ -46,9 +48,9 @@ public class FileBackedTaskManagerTest {
     @Test
     void checkEmptyFileForWrite() {
         fileBackedTaskManager.setFileName(file.getName());
-        fileBackedTaskManager.createTask(new Task("Задача1", "Описание Задачи1"));
+        fileBackedTaskManager.createTask(new Task("Задача1", "Описание Сабтаски 1", "08.06.2024 12:15", "15"));
         fileBackedTaskManager.createEpic(new Epic("Эпик1", "Описание Эпика1"));
-        fileBackedTaskManager.createSubTask(new SubTask("Сабтаска1", "Описание Сабтаски 1", 10));
+        fileBackedTaskManager.createSubTask(new SubTask("Сабтаска1", "Описание Сабтаски 1", fileBackedTaskManager.getId(), TaskStatus.NEW, "08.06.2024 13:15", "15"));
         Assertions.assertEquals(1, fileBackedTaskManager.getAllTasks().size());
         Assertions.assertEquals(1, fileBackedTaskManager.getAllEpics().size());
         Assertions.assertEquals(1, fileBackedTaskManager.getAllSubTask().size());
@@ -56,5 +58,20 @@ public class FileBackedTaskManagerTest {
         Assertions.assertEquals(1, fileBackedTaskManager.getAllTasks().size(), "Произошла ошибка загрузки");
         Assertions.assertEquals(1, fileBackedTaskManager.getAllEpics().size(), "Произошла ошибка загрузки");
         Assertions.assertEquals(1, fileBackedTaskManager.getAllSubTask().size(), "Произошла ошибка загрузки");
+    }
+
+    @Test
+    public void testExceptions() {
+
+        Assertions.assertDoesNotThrow(() -> {
+            fileBackedTaskManager.loadFromFile();
+        }, "ManagerSaveException was expected");
+    }
+
+    @Test
+    public void testException() {
+        Assertions.assertThrows(ArithmeticException.class, () -> {
+            int a = 10 / 0;
+        }, "Деление на ноль должно приводить к исключению");
     }
 }

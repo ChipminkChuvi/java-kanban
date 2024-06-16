@@ -6,6 +6,7 @@ import taskmodel.Task;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface TaskManager<I> {
 
@@ -55,5 +56,10 @@ public interface TaskManager<I> {
     List<SubTask> getSubTaskFromEpic(Integer idEpic);
 
     HistoryManager getHistoryManager();
+    void LoadSortSet();
+
+    Set<Task> getPriorityTaskView();
+
+    boolean overlapDateTime(Task task);
 }
 
