@@ -9,17 +9,19 @@ public class Task {
     private int id;
     private String name;
     private String description;
-    private TaskStatus taskStatus;
+    private TaskStatus taskStatus = TaskStatus.NEW;
 
-    private Duration duration;
-    private LocalDateTime startTime;
+    private Duration duration = Duration.ofMinutes(15);
+    private LocalDateTime startTime = LocalDateTime.now();
+
+    public Task() {
+    }
 
     protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public Task(String name, String description, String startTime, String duration) {
         this.name = name;
         this.description = description;
-        this.taskStatus = TaskStatus.NEW;
         this.startTime = LocalDateTime.parse(startTime, formatter);
         this.duration = Duration.ofMinutes(Integer.parseInt(duration));
     }
@@ -45,7 +47,6 @@ public class Task {
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
-        this.taskStatus = TaskStatus.NEW;
         this.startTime = LocalDateTime.now();
         this.duration = Duration.ofMinutes(15);
     }
@@ -54,7 +55,6 @@ public class Task {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.taskStatus = TaskStatus.NEW;
         this.startTime = LocalDateTime.now();
         this.duration = Duration.ofMinutes(15);
     }
@@ -63,7 +63,6 @@ public class Task {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.taskStatus = TaskStatus.NEW;
         this.startTime = startTime;
         this.duration = duration;
     }
@@ -77,7 +76,7 @@ public class Task {
     }
 
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -125,7 +124,11 @@ public class Task {
     }
 
     public LocalDateTime getEndTime() {
-        return startTime.plus(duration);
+        if (duration == null) {
+            return startTime.plus(Duration.ofMinutes(0));
+        } else {
+            return startTime.plus(duration);
+        }
     }
 
     public void setDuration(Duration duration) {

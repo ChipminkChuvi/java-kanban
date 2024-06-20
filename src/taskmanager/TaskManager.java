@@ -56,10 +56,13 @@ public interface TaskManager<I> {
     List<SubTask> getSubTaskFromEpic(Integer idEpic);
 
     HistoryManager getHistoryManager();
+
     void LoadSortSet();
 
     Set<Task> getPriorityTaskView();
 
     boolean overlapDateTime(Task task);
+
+    boolean getStatusCode();
 }
 
