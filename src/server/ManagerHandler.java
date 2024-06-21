@@ -21,7 +21,7 @@ import java.util.*;
 public class ManagerHandler extends InMemoryTaskManager implements HttpHandler {
 
     private TaskManager inMemoryTaskManagerNetwork;
-    Gson gson = new GsonBuilder()
+    private Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
             .registerTypeAdapter(Duration.class, new DurationAdapter())
@@ -56,6 +56,9 @@ public class ManagerHandler extends InMemoryTaskManager implements HttpHandler {
                 handlerDelete(uri);
                 break;
             default:
+                responseText = "Некорректный тип HTTP-запроса";
+                responseCode = 404;
+                break;
         }
         exchange.sendResponseHeaders(responseCode, 0);
         try (OutputStream outputStream = exchange.getResponseBody()) {
@@ -194,9 +197,10 @@ public class ManagerHandler extends InMemoryTaskManager implements HttpHandler {
                 responseCode = 200;
                 listTask.addAll(inMemoryTaskManagerNetwork.getPriorityTaskView());
                 return listTask;
+            default:
+                responseCode = 404;
+                return null;
         }
-        responseCode = 404;
-        return null;
     }
 
     private void handlerDelete(String[] uri) {

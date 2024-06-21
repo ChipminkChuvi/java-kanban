@@ -25,12 +25,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class HttpTaskManagerPostTest {
-    InMemoryTaskManager manager = new InMemoryTaskManager();
-    HttpServer httpServer = HttpServer.create(new InetSocketAddress(8080), 0);
+    private InMemoryTaskManager manager = new InMemoryTaskManager();
+    private HttpServer httpServer = HttpServer.create(new InetSocketAddress(8080), 0);
 
-    ManagerHandler managerHandler = new ManagerHandler();
+    private ManagerHandler managerHandler = new ManagerHandler();
 
-    Gson gson = new GsonBuilder()
+    private Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
             .registerTypeAdapter(Duration.class, new DurationAdapter())
